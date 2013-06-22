@@ -1,10 +1,8 @@
 package com.nauka;
 
 import org.anddev.andengine.entity.IEntity;
-import org.anddev.andengine.entity.modifier.MoveModifier;
 import org.anddev.andengine.entity.modifier.MoveYModifier;
 import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
 import android.hardware.SensorEvent;

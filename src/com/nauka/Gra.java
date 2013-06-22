@@ -21,7 +21,6 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 	Sprite pocisk;
 	Samolot mig;
 
-    private int x, y; // Sprite coordinates
     private SensorManager sensorManager;
     
 	Gra()
@@ -35,7 +34,6 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		
 	    mig = new Samolot(Samolot.typ);
 	    
-		x = w/2; y = h*4/5; 
 		mapa = new Sprite(0, 0, mapa_t.region);
 		mapa.setScaleCenter(0, 0);
 		mapa.setWidth(w);
