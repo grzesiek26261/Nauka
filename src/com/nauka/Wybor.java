@@ -36,7 +36,7 @@ public class Wybor extends Scene
 				{
 					Samolot.typ = 1;
 					Samolot.ilosc_karabinow = 8;
-					act.setCurrentScene(new Gra());
+					act.setCurrentScene(new Gra(1));
 					return true;
 				}
 				else
@@ -57,7 +57,7 @@ public class Wybor extends Scene
 				{
 					Samolot.typ = 2;
 					Samolot.ilosc_karabinow = 4;
-					act.setCurrentScene(new Gra());
+					act.setCurrentScene(new Gra(2));
 					return true;
 				}
 				else
@@ -78,7 +78,7 @@ public class Wybor extends Scene
 				{
 					Samolot.typ = 3;
 					Samolot.ilosc_karabinow = 4;
-					act.setCurrentScene(new Gra());
+					act.setCurrentScene(new Gra(3));
 					return true;
 				}
 				else

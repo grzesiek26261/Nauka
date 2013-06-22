@@ -23,7 +23,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 
     private SensorManager sensorManager;
     
-	Gra()
+	Gra(int typ)
 	{
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH;
@@ -32,7 +32,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		act.game = this;
 		
 		
-	    mig = new Samolot(Samolot.typ);
+	    mig = new Samolot(typ);
 	    
 		mapa = new Sprite(0, 0, mapa_t.region);
 		mapa.setScaleCenter(0, 0);

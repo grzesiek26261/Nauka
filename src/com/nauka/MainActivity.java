@@ -56,7 +56,7 @@ public class MainActivity extends BaseGameActivity
 	    			11f ,true,Color.WHITE);
 	    	mFont.reload();
 	    	
-	    	this.setCurrentScene(new Gra());
+	    	this.setCurrentScene(new Gra(1));
 	    	
 	    }
 	 

@@ -27,6 +27,7 @@ public class Samolot
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH; h = act.HEIGHT;
 		
+		this.typ = typ;
 		bullets = new Sprite[8];
 		isattached = new boolean[8];
 		
