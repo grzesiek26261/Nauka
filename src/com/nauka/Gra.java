@@ -1,5 +1,5 @@
 package com.nauka;
-
+//test
 import org.anddev.andengine.engine.handler.IUpdateHandler;
 
 import org.anddev.andengine.entity.scene.Scene;
