@@ -10,8 +10,9 @@ public class Samolot
 	 float 	x,
 	 		y,
 	 		speed,
-	 		przegrzanie,
-	 		szybkosc_przegrzewania;
+	 		przegrzanie=0,
+	 		szybkosc_przegrzewania=1f,
+	 		max_przegrzania = 10f;
 	 
 	 int 	w,
 	 		h,
@@ -44,9 +45,9 @@ TextureRegion 	pocisktex;
 
 		tex = new Sprite(0, 0, new lb("s"+Integer.toString(typ), 512, 512).region);
 			tex.setScaleCenter(0, 0);
-			tex.setScale(w / tex.getWidth() / 3);
+			tex.setScale(w / tex.getWidth() / 4);
 			tex.setPosition(w * 0.6f - tex.getWidthScaled(), h  * 0.9f - tex.getHeightScaled());
-		pocisktex = new lb("Pocisk", 8, 8).region;
+		pocisktex = new lb("Pocisk", 8, 16).region;
 		
 		switch(typ)
 		{
@@ -76,7 +77,7 @@ TextureRegion 	pocisktex;
 	
 	public void shot(int kombinacja,int ilosc_pociskow) //strzela podan¹ kombinacj¹ , 0 - seria, 1 - ci¹g³y ogieñ.
 	{
-		if (czymoznastrzelac == false) return;
+		
 		prepareFirstly();
 		{
 		 switch(kombinacja)
@@ -86,7 +87,7 @@ TextureRegion 	pocisktex;
 	 			
 	 			for(int i = 0 ; i < ilosc_pociskow;i++)
 	 			{
-	 				to_shot[i].shot(tex.getX() + ( i * bullet[i].sprite.getWidthScaled()), tex.getY());
+	 				to_shot[i].shot(tex.getX() + ( i *( tex.getWidthScaled()/ilosc_pociskow)), tex.getY());
 	 			}
 
 		    break;
@@ -153,6 +154,9 @@ TextureRegion 	pocisktex;
 	
 	public void move(SensorEvent event)
 	{
+		if(przegrzanie > 0){act.game.hud.setPrzegrzanie((max_przegrzania / przegrzanie));System.out.println(przegrzanie);}
+		
+		
 		if( tex.getX() < w - tex.getWidthScaled() ) //KOLIZJA PRAWEJ STRONY
 			tex.setPosition(tex.getX() - event.values[0]/speed, tex.getY());
 		else

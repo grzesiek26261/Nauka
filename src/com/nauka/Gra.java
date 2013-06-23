@@ -20,7 +20,8 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 	Sprite mapa;
 	Sprite pocisk;
 	Samolot mig;
-
+	_HUD_ hud;
+	
     private SensorManager sensorManager;
     
 	Gra(int typ)
@@ -31,7 +32,9 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		lb mapa_t = new lb("Mapa", 512, 512);
 		act.game = this;
 		act.mCurrentScene = this;
-		
+		hud = new _HUD_();
+	
+
 		
 	    mig = new Samolot(typ);
 	    

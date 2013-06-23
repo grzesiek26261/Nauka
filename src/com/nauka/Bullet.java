@@ -19,7 +19,7 @@ public class Bullet
 		
 		sprite = new Sprite(x,y,tex);
 		sprite.setScaleCenter(0, 0);
-		sprite.setScale(act.WIDTH/30/sprite.getWidth());
+		sprite.setScale(act.WIDTH/90/sprite.getWidth());
 
 	}
 	
@@ -38,12 +38,15 @@ public class Bullet
 		isready = true;
 		setInVisible();
 		sprite.setPosition(-100, -100);
+		if(act.game.mig.przegrzanie-(act.game.mig.szybkosc_przegrzewania*0.5f) > 0)
+		act.game.mig.przegrzanie-=(act.game.mig.szybkosc_przegrzewania*0.5f);
 	}
 	
 	
 	
 	void shot(float c, float v)
 	{
+		act.game.mig.przegrzanie+=act.game.mig.szybkosc_przegrzewania*0.1f;
 		isready = false;
 		setVisible();
 		sprite.setPosition(c,v);
