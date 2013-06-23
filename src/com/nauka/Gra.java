@@ -77,19 +77,9 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 	}
 
 	@Override
-	public boolean onSceneTouchEvent(Scene arg0, TouchEvent event)
-    {
-		if(event.isActionDown())
-		{
-			if(mig.ilosc_karabinow == 4)
-			{
-					mig.shot(0,8);
-			}
-		}
-			
-			
-				
-		
+	public boolean onSceneTouchEvent(Scene arg0, TouchEvent arg1) 
+	{
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

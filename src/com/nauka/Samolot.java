@@ -46,18 +46,18 @@ TextureRegion 	pocisktex;
 		tex = new Sprite(0, 0, new lb("s"+Integer.toString(typ), 512, 512).region);
 			tex.setScaleCenter(0, 0);
 			tex.setScale(w / tex.getWidth() / 4);
-			tex.setPosition(w * 0.6f - tex.getWidthScaled(), h  * 0.9f - tex.getHeightScaled());
+			tex.setPosition(w * 0.6f - tex.getWidthScaled(), h  * 0.8f - tex.getHeightScaled());
 		pocisktex = new lb("Pocisk", 8, 16).region;
 		
 		switch(typ)
 		{
 			case 1:
 				speed = 1.5f;
-				ilosc_karabinow = 4;
+				ilosc_karabinow = 8;
 				break;
 			case 2: 
 				speed = 1.25f;
-				ilosc_karabinow = 6;
+				ilosc_karabinow = 4;
 				break;
 			case 3:
 				speed = 1f;
@@ -173,21 +173,21 @@ TextureRegion 	pocisktex;
 			tex.setPosition(tex.getX() - event.values[0]/speed, tex.getY());
 		}
 		
-		if( tex.getY() > 0 ) //KOLIZJA GÓRY
-			tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
-		else
-		{
-			tex.setPosition(tex.getX(), 0);	
-			tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
-		}
+		//if( tex.getY() > 0 ) //KOLIZJA GÓRY
+		//	tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
+		//else
+		//{
+		//	tex.setPosition(tex.getX(), 0);	
+		//	tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
+		//}
 		
-		if( tex.getY() < h - tex.getHeightScaled() ) // KOLIZJA DO£U
-			tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
-		else
-		{
-			tex.setPosition(tex.getX(), h - tex.getHeightScaled() );	
-			tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
-		}
+		//if( tex.getY() < h - tex.getHeightScaled() ) // KOLIZJA DO£U
+		//	tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
+		//else
+		//{
+		//	tex.setPosition(tex.getX(), h - tex.getHeightScaled() );	
+		//	tex.setPosition(tex.getX(), tex.getY() + event.values[1]/speed);
+		//}
 	}
 	
 	

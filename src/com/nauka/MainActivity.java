@@ -88,7 +88,7 @@ public class MainActivity extends BaseGameActivity
 		public void onLoadComplete() 
 	    {
 			// TODO Auto-generated method stub
-	    	this.setCurrentScene(new Gra(1));
+	    	this.setCurrentScene(new Introd());
 		}
 	}
 	
