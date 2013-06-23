@@ -56,7 +56,8 @@ public class MainActivity extends BaseGameActivity
 	    			11f ,true,Color.WHITE);
 	    	mFont.reload();
 	    	
-	    	this.setCurrentScene(new Gra(1));
+	    	
+	    	//setCurrentScene(new LevelSelector (21,new lb("Menu",320,480),new lb("star",128,128),new lb("level",512,512),new lb("level_lock",512,512)));
 	    	
 	    }
 	 
@@ -87,7 +88,7 @@ public class MainActivity extends BaseGameActivity
 		public void onLoadComplete() 
 	    {
 			// TODO Auto-generated method stub
-			
+	    	this.setCurrentScene(new Gra(1));
 		}
 	}
 	

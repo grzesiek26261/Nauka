@@ -30,6 +30,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		h = act.HEIGHT;
 		lb mapa_t = new lb("Mapa", 512, 512);
 		act.game = this;
+		act.mCurrentScene = this;
 		
 		
 	    mig = new Samolot(typ);
@@ -40,7 +41,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		mapa.setHeight(h);
 		
 		attachChild(mapa);
-		attachChild(Samolot.tex);
+		attachChild(mig.tex);
 		
 		sensorManager = (SensorManager) act.getSystemService(Context.SENSOR_SERVICE);
 		sensorManager.registerListener(this, 
@@ -77,23 +78,15 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
     {
 		if(event.isActionDown())
 		{
-			if(Samolot.ilosc_karabinow == 4)
+			if(mig.ilosc_karabinow == 4)
 			{
-				for(short i = 0; i < 2; i++)
-					{mig.shot(2);
-				   // attachChild(Samolot.pocisk);
-					}
+					mig.shot(0,8);
 			}
-			
-			if(Samolot.ilosc_karabinow == 8)
-			{
-				for(short i = 0; i < 4; i++)
-					{mig.shot(4);
-				    //attachChild(Samolot.pocisk);}
-					}
-			}
-				
 		}
+			
+			
+				
+		
 		return false;
 	}
 }
