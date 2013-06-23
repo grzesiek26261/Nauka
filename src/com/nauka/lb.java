@@ -15,6 +15,8 @@ public class lb
 	lb(String name, int w, int h)
 	{
 		act = MainActivity.getSharedInstance();
+		w = poteguj(w);
+		h = poteguj(h);
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		atlas = new BitmapTextureAtlas(w, h,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, act, name+".png", 0, 0);
@@ -22,4 +24,24 @@ public class lb
 		
 		
 	}
+	
+	
+	
+	private int poteguj(int x)
+	{
+	  for(int i = 0 ; i < 50; i++)
+		if(Math.pow(2, i) == x) return x;
+
+	  for(int i = 0 ; i < 50 ;i++)
+	  {
+		  if (Math.pow(2, i) > x) return (int) Math.pow(2, i);
+	  }
+	  
+	  return -1;
+	}
+	
+	
+	
+	
 }
+

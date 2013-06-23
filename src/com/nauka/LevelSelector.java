@@ -124,7 +124,7 @@ public class LevelSelector extends Scene implements IOnSceneTouchListener, IScro
 				c++;
 			}
 		 ///////////////////////////
-		 setOnSceneTouchListener(this);
+		// setOnSceneTouchListener(this);
 		 act.mCamera.setBounds(0, 0,w,btn[0].getHeightScaled() * (liczba/3+1)+1 + przerwa * (liczba/3)+1);//zakres kamery //TODO wazne!
 		 act.mCamera.setBoundsEnabled(true);
 		 
