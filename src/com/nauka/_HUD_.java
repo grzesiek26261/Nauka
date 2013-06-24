@@ -23,11 +23,11 @@ public class _HUD_ extends HUD
 		przegrzanie.setScale(act.WIDTH *0.5f/ przegrzanie.getWidth());
 		przegrzanie.setHeight(0.15f * act.HEIGHT);
 		
-		spriteZaslaniaczPocisku = new Sprite(0, 0, new lb("Zaslaniacz", 1024, 1024).region);
-		spriteZaslaniaczPocisku.setScaleCenter(0, 0);
-		spriteZaslaniaczPocisku.setWidth(act.WIDTH);
-		spriteZaslaniaczPocisku.setHeight(act.HEIGHT * 0.22f );
-		spriteZaslaniaczPocisku.setPosition(0, act.HEIGHT - spriteZaslaniaczPocisku.getHeightScaled());
+				spriteZaslaniaczPocisku = new Sprite(0, 0, new lb("Zaslaniacz", 1024, 1024).region);
+				spriteZaslaniaczPocisku.setScaleCenter(0, 0);
+				spriteZaslaniaczPocisku.setWidth(act.WIDTH);
+				spriteZaslaniaczPocisku.setHeight(act.HEIGHT * 0.22f );
+				spriteZaslaniaczPocisku.setPosition(0, act.HEIGHT - spriteZaslaniaczPocisku.getHeightScaled());
 		
 		
 		
@@ -43,6 +43,7 @@ public class _HUD_ extends HUD
 			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
 		    {
 					{
+					 if(act.ID != 3) return false;
 						if(act.game.mig.czyprzegrzany == true) {if(przegrzanie.isAnimationRunning()==false) przegrzanie.animate(150);	return true;}
 							if(przegrzanie.isAnimationRunning()) przegrzanie.stopAnimation();
 						
@@ -67,10 +68,10 @@ public class _HUD_ extends HUD
 		
 		
 		registerTouchArea(spriteHUDf);
-		attachChild(spriteZaslaniaczPocisku);
-		attachChild(przegrzanie);
-		attachChild(spriteHUD);
-		attachChild(spriteHUDf);
+			attachChild(spriteZaslaniaczPocisku);
+			attachChild(przegrzanie);
+			attachChild(spriteHUD);
+			attachChild(spriteHUDf);
 		
 		
 		act.mCamera.setHUD(this);

@@ -39,6 +39,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		act.game = this;
 		act.mCurrentScene = this;
 		hud = new _HUD_();
+		hud.setVisible(true);
 		sceneria = new Sceneria();
 		
 		

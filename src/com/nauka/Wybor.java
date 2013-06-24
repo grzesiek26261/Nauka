@@ -29,6 +29,8 @@ public class Wybor extends Scene implements IOnSceneTouchListener, IScrollDetect
 		
 		w = act.WIDTH; h = act.HEIGHT;
 		act.mCamera.setCenter(w / 2 , h / 2);
+		
+		 
 		act.ID = 2;
 		lb background_t = new lb("Menu", 512, 512);
 		background = new Sprite(0, 0, background_t.region);

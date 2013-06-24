@@ -30,6 +30,7 @@ public class BackManager
 			act.setCurrentScene(new Menu());
 			break;
 		case 3:
+			act.game.hud.setVisible(false);
 			act.setCurrentScene(new Wybor());
 			
 			break;
