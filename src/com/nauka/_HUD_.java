@@ -20,7 +20,7 @@ public class _HUD_ extends HUD
 		act = MainActivity.getSharedInstance();
 		przegrzanie = new AnimatedSprite(0, 0, new stb("Bar", 512, 64,2,1).tiledT);
 		przegrzanie.setScaleCenter(0, 0);
-		przegrzanie.setScale(act.WIDTH /2/ przegrzanie.getWidth());
+		przegrzanie.setScale(act.WIDTH *0.5f/ przegrzanie.getWidth());
 		przegrzanie.setHeight(0.15f * act.HEIGHT);
 		
 		spriteZaslaniaczPocisku = new Sprite(0, 0, new lb("Zaslaniacz", 1024, 1024).region);
@@ -79,8 +79,8 @@ public class _HUD_ extends HUD
 	
 	void setPrzegrzanie()
 	{
-		przegrzanie_zmienna = (act.game.mig.przegrzanie * stoprocent)/act.game.mig.max_przegrzania  ;
-		przegrzanie.setWidth(przegrzanie_zmienna*1.5f);	
+		przegrzanie_zmienna = (act.game.mig.przegrzanie * stoprocent)/act.game.mig.max_przegrzania ;
+		przegrzanie.setWidth(przegrzanie_zmienna);	
 		przegrzanie.setPosition(0, 0.92f * act.HEIGHT);
 	}
 	
