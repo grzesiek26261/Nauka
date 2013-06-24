@@ -26,7 +26,7 @@ public class _HUD_ extends HUD
 		spriteZaslaniaczPocisku = new Sprite(0, 0, new lb("Zaslaniacz", 1024, 1024).region);
 		spriteZaslaniaczPocisku.setScaleCenter(0, 0);
 		spriteZaslaniaczPocisku.setWidth(act.WIDTH);
-		spriteZaslaniaczPocisku.setHeight(spriteZaslaniaczPocisku.getHeight() * 0.5f );
+		spriteZaslaniaczPocisku.setHeight(act.HEIGHT * 0.22f );
 		spriteZaslaniaczPocisku.setPosition(0, act.HEIGHT - spriteZaslaniaczPocisku.getHeightScaled());
 		
 		
@@ -34,7 +34,7 @@ public class _HUD_ extends HUD
 		spriteHUD = new Sprite(0, 0, new lb("HUD", 1024, 1024).region);
 		spriteHUD.setScaleCenter(0, 0);
 		spriteHUD.setWidth(act.WIDTH);
-		spriteHUD.setHeight(spriteHUD.getHeight() * 0.5f );
+		spriteHUD.setHeight(act.HEIGHT * 0.22f );
 		spriteHUD.setPosition(0, act.HEIGHT - spriteHUD.getHeightScaled());
 		
 		spriteHUDf = new Sprite(0, 0, new lb("HUDfire", 128, 128).region)
@@ -80,8 +80,8 @@ public class _HUD_ extends HUD
 	void setPrzegrzanie()
 	{
 		przegrzanie_zmienna = (act.game.mig.przegrzanie * stoprocent)/act.game.mig.max_przegrzania  ;
-		przegrzanie.setWidth(przegrzanie_zmienna*2);	
-		przegrzanie.setPosition(0 - przegrzanie.getWidthScaled()/3f, 0.92f * act.HEIGHT);
+		przegrzanie.setWidth(przegrzanie_zmienna*1.5f);	
+		przegrzanie.setPosition(0, 0.92f * act.HEIGHT);
 	}
 	
 	void updateHUD()
