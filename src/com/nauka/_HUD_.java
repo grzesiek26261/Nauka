@@ -11,7 +11,8 @@ public class _HUD_ extends HUD
 	MainActivity act;
 	AnimatedSprite 	przegrzanie;
 		   Sprite 	spriteHUD,
-		   			spriteHUDf;
+		   			spriteHUDf,
+		            spriteZaslaniaczPocisku;
 	private float stoprocent ;
 	float przegrzanie_zmienna;
 	_HUD_()
@@ -20,12 +21,20 @@ public class _HUD_ extends HUD
 		przegrzanie = new AnimatedSprite(0, 0, new stb("Bar", 512, 64,2,1).tiledT);
 		przegrzanie.setScaleCenter(0, 0);
 		przegrzanie.setScale(act.WIDTH /2/ przegrzanie.getWidth());
-		przegrzanie.setHeight(20);
+		przegrzanie.setHeight(0.15f * act.HEIGHT);
 		
-		spriteHUD = new Sprite(0, 0, new lb("HUD", 256, 256).region);
+		spriteZaslaniaczPocisku = new Sprite(0, 0, new lb("Zaslaniacz", 1024, 1024).region);
+		spriteZaslaniaczPocisku.setScaleCenter(0, 0);
+		spriteZaslaniaczPocisku.setWidth(act.WIDTH);
+		spriteZaslaniaczPocisku.setHeight(spriteZaslaniaczPocisku.getHeight() * 0.5f );
+		spriteZaslaniaczPocisku.setPosition(0, act.HEIGHT - spriteZaslaniaczPocisku.getHeightScaled());
+		
+		
+		
+		spriteHUD = new Sprite(0, 0, new lb("HUD", 1024, 1024).region);
 		spriteHUD.setScaleCenter(0, 0);
 		spriteHUD.setWidth(act.WIDTH);
-		spriteHUD.setHeight(spriteHUD.getHeight() * 1.8f );
+		spriteHUD.setHeight(spriteHUD.getHeight() * 0.5f );
 		spriteHUD.setPosition(0, act.HEIGHT - spriteHUD.getHeightScaled());
 		
 		spriteHUDf = new Sprite(0, 0, new lb("HUDfire", 128, 128).region)
@@ -58,6 +67,7 @@ public class _HUD_ extends HUD
 		
 		
 		registerTouchArea(spriteHUDf);
+		attachChild(spriteZaslaniaczPocisku);
 		attachChild(przegrzanie);
 		attachChild(spriteHUD);
 		attachChild(spriteHUDf);
@@ -71,7 +81,7 @@ public class _HUD_ extends HUD
 	{
 		przegrzanie_zmienna = (act.game.mig.przegrzanie * stoprocent)/act.game.mig.max_przegrzania  ;
 		przegrzanie.setWidth(przegrzanie_zmienna*2);	
-		przegrzanie.setPosition(act.WIDTH / 2 - przegrzanie.getWidthScaled() /2 , 0);
+		przegrzanie.setPosition(0 - przegrzanie.getWidthScaled()/3f, 0.92f * act.HEIGHT);
 	}
 	
 	void updateHUD()
