@@ -35,7 +35,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH;
 		h = act.HEIGHT;
-		
+		act.ID = 3;
 		act.game = this;
 		act.mCurrentScene = this;
 		hud = new _HUD_();

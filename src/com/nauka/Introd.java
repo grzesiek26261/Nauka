@@ -16,7 +16,7 @@ public class Introd extends Scene
 		w = act.WIDTH;
 		h = act.HEIGHT;
 		lb intro_t = new lb("Intro", 512, 512);
-		
+		act.ID = 0;
 		intro = new Sprite(0, 0, intro_t.region)
 		{
 			@Override
