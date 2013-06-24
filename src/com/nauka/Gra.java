@@ -1,10 +1,11 @@
 package com.nauka;
 //test
-import org.anddev.andengine.engine.handler.IUpdateHandler;
-
+import org.anddev.andengine.engine.handler.timer.ITimerCallback;
+import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.sprite.Sprite;
+import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.input.touch.TouchEvent;
 
 import android.content.Context;
@@ -13,14 +14,19 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
-public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListener
+public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListener,ITimerCallback 
 {
 	MainActivity act;
 	int w,h;
-	Sprite mapa;
+
+	Sceneria sceneria;
 	Sprite pocisk;
 	Samolot mig;
 	_HUD_ hud;
+	
+	TimerHandler timerHandler,sceneriatimer;
+	int tick = 0 ; //zegar
+	
 	
     private SensorManager sensorManager;
     
@@ -29,42 +35,55 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH;
 		h = act.HEIGHT;
-		lb mapa_t = new lb("Mapa", 512, 512);
+		
 		act.game = this;
 		act.mCurrentScene = this;
 		hud = new _HUD_();
-	
-
+		sceneria = new Sceneria();
 		
+		
+		FPSLogger a = new FPSLogger();
+		registerUpdateHandler(a);
 	    mig = new Samolot(typ);
 	    
-		mapa = new Sprite(0, 0, mapa_t.region);
-		mapa.setScaleCenter(0, 0);
-		mapa.setWidth(w);
-		mapa.setHeight(h);
+
 		
-		attachChild(mapa);
+		attachChild(sceneria.mapa);
+		
+		for(int i = 0 ; i < sceneria.cloud.length; i++)
+			attachChild(sceneria.cloud[i]);
+		
 		attachChild(mig.tex);
 		
 		sensorManager = (SensorManager) act.getSystemService(Context.SENSOR_SERVICE);
 		sensorManager.registerListener(this, 
 					  sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), 
 					  SensorManager.SENSOR_DELAY_GAME);
-		registerUpdateHandler(new IUpdateHandler() 
-		{ 
-			@Override
-			public void onUpdate(float pSecondsElapsed) 
-			{
-				//updateSpritePosition();
-            }
-			@Override
-			public void reset() 
-			{}
-		});		
-		
+	
+		timerHandler = new TimerHandler(0.001f, true, this);
+		   registerUpdateHandler(timerHandler);
+		   
+
+		  
+		  
 		this.setOnSceneTouchListener(this);
 	}
 
+	
+	@Override //UPDATER
+		public void onTimePassed(TimerHandler h) {
+		
+		tick++;
+		if(tick%100 == 0)hud.updateHUD();//za kazdym razem updatuje 
+		sceneria.update();
+		
+		if(tick>=1000) tick = 0 ;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) 
 	{

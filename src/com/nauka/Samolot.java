@@ -11,19 +11,21 @@ public class Samolot
 	 		y,
 	 		speed,
 	 		przegrzanie=0,
-	 		szybkosc_przegrzewania=1f,
+	 		szybkosc_przegrzewania=0.9f,
+	 		szybkosc_chlodzenia = 0.4f,
+	 		wspolczynnik_cieplny = 1f,
 	 		max_przegrzania = 10f;
 	 
 	 int 	w,
 	 		h,
 	 		typ = -1,
-	 		ilosc_karabinow;
+	 		ilosc_karabinow = 2;
 	
 	 Sprite 	tex;
 	 
 	 Bullet[] 	bullet,to_shot;
 	 boolean[] 	isattached,gotowy;//gotowy - tablica dla kazdego pocisku, jesli true wtedy mozna go uzywac znowu jesli false to nie 
-	 boolean 	czymoznastrzelac = true,FIRST_PLAY = true;
+	 boolean 	czymoznastrzelac = true,FIRST_PLAY = true, czyprzegrzany = false;
 	 
 TextureRegion 	pocisktex;
 	 
@@ -41,8 +43,8 @@ TextureRegion 	pocisktex;
 		
 		this.typ = typ;
 		
-		bullet = new Bullet[32];//na mapie moga byc jednoczesnie 32 pociski
-
+		bullet = new Bullet[164];//na mapie moga byc jednoczesnie 32 pociski
+	
 		tex = new Sprite(0, 0, new lb("s"+Integer.toString(typ), 512, 512).region);
 			tex.setScaleCenter(0, 0);
 			tex.setScale(w / tex.getWidth() / 4);
@@ -53,15 +55,15 @@ TextureRegion 	pocisktex;
 		{
 			case 1:
 				speed = 1.5f;
-				ilosc_karabinow = 8;
+				szybkosc_przegrzewania = 0.37f;
 				break;
 			case 2: 
 				speed = 1.25f;
-				ilosc_karabinow = 4;
+				szybkosc_przegrzewania = 0.28f;
 				break;
 			case 3:
 				speed = 1f;
-				ilosc_karabinow = 8;
+				szybkosc_przegrzewania = 0.18f;
 				break;
 		}
 
@@ -75,20 +77,21 @@ TextureRegion 	pocisktex;
 	
 	
 	
-	public void shot(int kombinacja,int ilosc_pociskow) //strzela podan¹ kombinacj¹ , 0 - seria, 1 - ci¹g³y ogieñ.
+	public void shot(int kombinacja) //strzela podan¹ kombinacj¹ , 0 - seria, 1 - ci¹g³y ogieñ.
 	{
 		
-		prepareFirstly();
+		prepareFirstly(ilosc_karabinow);
 		{
 		 switch(kombinacja)
 		 {
 		 	case 0:
-		 		to_shot = rezerwuj(ilosc_pociskow);		if (czymoznastrzelac==false)return;
+		 		to_shot = rezerwuj(ilosc_karabinow);		if (czymoznastrzelac==false ||  czyprzegrzany == true )return;
 	 			
-	 			for(int i = 0 ; i < ilosc_pociskow;i++)
-	 			{
-	 				to_shot[i].shot(tex.getX() + ( i *( tex.getWidthScaled()/ilosc_pociskow)), tex.getY());
-	 			}
+		 		to_shot[0].shot(tex.getX() + tex.getWidthScaled()/2 - to_shot[0].sprite.getWidthScaled()*1.1f , tex.getY());
+		 		to_shot[1].shot(tex.getX() + tex.getWidthScaled()/2 + to_shot[0].sprite.getWidthScaled()*1.1f , tex.getY());
+		 		
+	 			
+	 			
 
 		    break;
 		 	case 1:
@@ -99,9 +102,20 @@ TextureRegion 	pocisktex;
 		}
 	}
 	
+	void przegrzej()
+	{
+		przegrzanie += szybkosc_przegrzewania * wspolczynnik_cieplny;
+		if(przegrzanie >= max_przegrzania) {przegrzanie = max_przegrzania; czyprzegrzany = true;}
+	}
 	
+	
+	void chlodz()
+	{
+		przegrzanie -= szybkosc_chlodzenia * wspolczynnik_cieplny;
+		if(przegrzanie <= 0 ) {przegrzanie = 0 ; czyprzegrzany = false;}
+	}
 
-	void prepareFirstly()
+	void prepareFirstly(int is)
 	{
 	if(FIRST_PLAY)
 	{
@@ -109,7 +123,7 @@ TextureRegion 	pocisktex;
 		{act.mCurrentScene.attachChild(bullet[i].sprite);
 	    bullet[i].sprite.setPosition(-100, -100);
 		}
-	 	FIRST_PLAY = false;
+	 	FIRST_PLAY = false; 	
 	}
 	return;
 	}
@@ -154,8 +168,7 @@ TextureRegion 	pocisktex;
 	
 	public void move(SensorEvent event)
 	{
-		if(przegrzanie > 0){act.game.hud.setPrzegrzanie((max_przegrzania / przegrzanie));System.out.println(przegrzanie);}
-		
+	
 		
 		if( tex.getX() < w - tex.getWidthScaled() ) //KOLIZJA PRAWEJ STRONY
 			tex.setPosition(tex.getX() - event.values[0]/speed, tex.getY());

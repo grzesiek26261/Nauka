@@ -6,6 +6,7 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -59,6 +60,7 @@ public class MainActivity extends BaseGameActivity
 	    	
 	    	//setCurrentScene(new LevelSelector (21,new lb("Menu",320,480),new lb("star",128,128),new lb("level",512,512),new lb("level_lock",512,512)));
 	    	
+	    	
 	    }
 	 
 	    @Override
@@ -81,6 +83,8 @@ public class MainActivity extends BaseGameActivity
 	    public void setCurrentScene(Scene scene)//zmienia aktywn¹ scene 
 	    {
 	    	mCurrentScene = scene;
+	    	
+	    	
 	        getEngine().setScene(mCurrentScene);
 	    }
 
@@ -88,7 +92,7 @@ public class MainActivity extends BaseGameActivity
 		public void onLoadComplete() 
 	    {
 			// TODO Auto-generated method stub
-	    	this.setCurrentScene(new Introd());
+	    	this.setCurrentScene(new Gra(1));
 		}
 	}
 	

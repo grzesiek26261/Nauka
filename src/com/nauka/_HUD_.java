@@ -1,7 +1,7 @@
 package com.nauka;
 
 import org.anddev.andengine.engine.camera.hud.HUD;
-import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 
@@ -9,15 +9,15 @@ public class _HUD_ extends HUD
 {
 
 	MainActivity act;
-	Sprite przegrzanie,
-		   spriteHUD,
-	       spriteHUDf;
+	AnimatedSprite 	przegrzanie;
+		   Sprite 	spriteHUD,
+		   			spriteHUDf;
 	private float stoprocent ;
-	
+	float przegrzanie_zmienna;
 	_HUD_()
 	{
 		act = MainActivity.getSharedInstance();
-		przegrzanie = new Sprite(0, 0, new lb("Bar", 256, 64).region);
+		przegrzanie = new AnimatedSprite(0, 0, new stb("Bar", 512, 64,2,1).tiledT);
 		przegrzanie.setScaleCenter(0, 0);
 		przegrzanie.setScale(act.WIDTH /2/ przegrzanie.getWidth());
 		przegrzanie.setHeight(20);
@@ -33,14 +33,18 @@ public class _HUD_ extends HUD
 			@Override
 			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
 		    {
-				if(pEvent.isActionDown())
-				{
-					if(act.game.mig.ilosc_karabinow == 4 || act.game.mig.ilosc_karabinow == 8)
 					{
-							act.game.mig.shot(0,8);
+						if(act.game.mig.czyprzegrzany == true) {if(przegrzanie.isAnimationRunning()==false) przegrzanie.animate(150);	return true;}
+							if(przegrzanie.isAnimationRunning()) przegrzanie.stopAnimation();
+						
+							przegrzanie.setCurrentTileIndex(0);
+							act.game.mig.shot(0);
+							act.game.mig.przegrzej();
+							
+							setPrzegrzanie();
 					}
-				}
-			return false;
+				
+			return true;
 		    }
 		};
 	    spriteHUDf.setScaleCenter(0, 0);
@@ -49,6 +53,9 @@ public class _HUD_ extends HUD
 	    		               act.HEIGHT * 1.02f - spriteHUDf.getHeightScaled());
 		
 		stoprocent = przegrzanie.getWidthScaled();
+		
+		
+		
 		
 		registerTouchArea(spriteHUDf);
 		attachChild(przegrzanie);
@@ -60,17 +67,18 @@ public class _HUD_ extends HUD
 	}
 	
 	
-	void setPrzegrzanie(float procent)
+	void setPrzegrzanie()
 	{
-		
-		przegrzanie.setWidth((stoprocent * procent) / 100);	
-		przegrzanie.setPosition(act.WIDTH/2 - przegrzanie.getWidthScaled()/2 , 0);
+		przegrzanie_zmienna = (act.game.mig.przegrzanie * stoprocent)/act.game.mig.max_przegrzania  ;
+		przegrzanie.setWidth(przegrzanie_zmienna*2);	
+		przegrzanie.setPosition(act.WIDTH / 2 - przegrzanie.getWidthScaled() /2 , 0);
 	}
 	
-	
-	
-	
-	
+	void updateHUD()
+	{
+		act.game.mig.chlodz();
+		setPrzegrzanie();
+	}
 	
 	
 	
