@@ -6,7 +6,6 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
@@ -27,7 +26,10 @@ public class MainActivity extends BaseGameActivity
 	 
 	 public Gra game;
 	 public static BaseActivity instance; //?
-
+	 public int ID = 0 ;//id sceny aktywnej
+	 private BackManager backmanager;
+	 
+	 
 	 int WIDTH,HEIGHT;//wys i szer okna gry
 	  
 	    @SuppressWarnings("deprecation")
@@ -57,12 +59,22 @@ public class MainActivity extends BaseGameActivity
 	    			11f ,true,Color.WHITE);
 	    	mFont.reload();
 	    	
-	    	
+	    	backmanager = new BackManager();
 	    	//setCurrentScene(new LevelSelector (21,new lb("Menu",320,480),new lb("star",128,128),new lb("level",512,512),new lb("level_lock",512,512)));
 	    	
 	    	
 	    }
 	 
+	    
+	    @Override
+	    public void onBackPressed()
+	    {
+	    	backmanager.backfrom(ID);
+	    }
+	    
+	    
+	    
+	    
 	    @Override
 		public Scene onLoadScene() 
 	    {
@@ -83,7 +95,7 @@ public class MainActivity extends BaseGameActivity
 	    public void setCurrentScene(Scene scene)//zmienia aktywn¹ scene 
 	    {
 	    	mCurrentScene = scene;
-	    	
+	    	mCamera.setCenter(WIDTH / 2 , HEIGHT / 2);	
 	    	
 	        getEngine().setScene(mCurrentScene);
 	    }
@@ -92,7 +104,7 @@ public class MainActivity extends BaseGameActivity
 		public void onLoadComplete() 
 	    {
 			// TODO Auto-generated method stub
-	    	this.setCurrentScene(new Gra(1));
+	    	this.setCurrentScene(new Wybor());
 		}
 	}
 	

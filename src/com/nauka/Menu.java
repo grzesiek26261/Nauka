@@ -17,7 +17,7 @@ public class Menu extends Scene
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH;
 		h = act.HEIGHT;
-		
+		act.ID = 1;
 		lb menu_t = new lb("Menu", 512, 512);
 		lb play_t = new lb("Play", 512, 512);
 		lb exit_t = new lb("Exit", 512, 512);

@@ -10,12 +10,14 @@ public class Sceneria
 	Sprite mapa;
 	Sprite[] cloud;
 	
+	
+	Random r;
 	Sceneria()
 	{
 		act = MainActivity.getSharedInstance();
 		lb mapa_t = new lb("Mapa", 512, 512);
 		
-		Random r = new Random();
+		r = new Random();
 		
 		
 		mapa = new Sprite(0, 0, mapa_t.region);
@@ -45,10 +47,23 @@ public class Sceneria
 	for(int i = 0 ; i < cloud.length ; i++)
 	{	
 		cloud[i].setPosition(cloud[i].getX(), cloud[i].getY()+1 );
-		if(cloud[i].getY() > act.HEIGHT) cloud[i].setPosition(cloud[i].getX(), -cloud[i].getHeightScaled());
+		if(cloud[i].getY() > act.HEIGHT)reset(cloud[i]);
 	}	
 		
 	}
+	
+	
+	
+	
+	void reset(Sprite x)
+	{
+		x.setPosition(r.nextInt(act.WIDTH), -(r.nextInt(act.HEIGHT/2)));
+	}
+	
+	
+	
+	
+	
 	
 	
 }
