@@ -35,26 +35,8 @@ public class IO {
 	void FirstGameDeclare()
 	{
 		putData("true","first_play");
-		putData("true","level_lock0");
-		putData("0","stars_reached0");
-		for (int i = 1 ; i < 21 ; i++ )//21 rund planowanych bylo na poczatku
-		{
-			putData("false","level_lock" + Integer.toString(i));
-			putData("0","stars_reached" + Integer.toString(i));
-			
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		putData("0","cash");
+		putData("0","distance");
 	}
 	
 	

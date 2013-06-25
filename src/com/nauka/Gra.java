@@ -13,7 +13,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.text.style.BulletSpan;
 
 public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListener,ITimerCallback 
 {
@@ -29,8 +28,10 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
     private SensorManager sensorManager;
     
     Przeciwnik[] tester;
+    int cash;
+    float distance;
     
-    
+    IO save;
     
 	Gra(int typ)
 	{
@@ -40,8 +41,14 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 			act.ID = 3;
 			act.game = this;
 			act.mCurrentScene = this;
+			act.isgamecreated = true;
 			
-			
+		save = new IO();
+		String first_play = save.getData("first_play");
+		if (first_play.equals("null")) save.FirstGameDeclare();
+		
+			cash = Integer.parseInt(save.getData("cash")) ; 
+			distance = Float.parseFloat(save.getData("distance"));
 			
 			
 		hud = new _HUD_();
@@ -110,9 +117,8 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 				mig.koliduj(tester);
 		}
 		
-		
-		
-		
+		distance+=0.1;
+
 		
 		
 		if(tick>=1000) tick = 0 ;

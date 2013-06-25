@@ -17,11 +17,7 @@ public class lb
 		act = MainActivity.getSharedInstance();
 		w = poteguj(w);
 		h = poteguj(h);
-		System.out.println(" ");
-		System.out.println(name);
-		System.out.println(w);
-		System.out.println(h);
-		System.out.println(" ");
+
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 		atlas = new BitmapTextureAtlas(w, h,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		region = BitmapTextureAtlasTextureRegionFactory.createFromAsset(atlas, act, name+".png", 0, 0);

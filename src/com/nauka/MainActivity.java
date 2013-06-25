@@ -29,7 +29,7 @@ public class MainActivity extends BaseGameActivity
 	 public static BaseActivity instance; //?
 	 public int ID = 0 ;//id sceny aktywnej
 	 private BackManager backmanager;
-	 
+	 boolean isgamecreated = false;
 	 
 	 int WIDTH,HEIGHT;//wys i szer okna gry
 	  
@@ -74,8 +74,7 @@ public class MainActivity extends BaseGameActivity
 	    	backmanager.backfrom(ID);
 	    }
 	    
-	    
-	    
+
 	    
 	    @Override
 		public Scene onLoadScene() 

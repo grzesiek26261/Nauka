@@ -28,11 +28,8 @@ public class Samolot
 	 boolean[] 	isattached,gotowy;//gotowy - tablica dla kazdego pocisku, jesli true wtedy mozna go uzywac znowu jesli false to nie 
 	 boolean 	czymoznastrzelac = true,FIRST_PLAY = true, czyprzegrzany = false;
 	 
-TextureRegion 	pocisktex;
-	 
-	 
-	 
-	 int tmp = -1;//eh
+	 int lives = 5; 
+	 TextureRegion 	pocisktex;
 	 
 	 
 	 
@@ -166,19 +163,16 @@ TextureRegion 	pocisktex;
 	{
 		for(int i = 0 ; i < x.length; i++)
 		{ if(x[i].is_alive)	 
-			if(tex.getX() > x[i].tex.getX() && tex.getX() + tex.getWidthScaled() < x[i].tex.getX() + x[i].tex.getWidthScaled() &&
-					tex.getY() > x[i].tex.getY() && tex.getY() + tex.getHeightScaled() < x[i].tex.getY() + x[i].tex.getHeightScaled() )
+			
+			if(tex.collidesWith(x[i].tex))
 			{
-				System.out.println("Kurwa jeb³em! PAcz jak jeb³em!");
-				//co ma robic po dedzie
+				lives--;
+				x[i].kill();
+				System.out.println(lives);
 			}
 		}
 	}
 
-	
-	
-	
-	
 	
 	public void move(SensorEvent event)
 	{

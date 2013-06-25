@@ -32,6 +32,11 @@ public class BackManager
 			break;
 		case 3:
 			act.game.hud.setVisible(false);
+			if(act.isgamecreated)
+				{
+				act.game.save.putData(Integer.toString(act.game.cash), "cash");
+				act.game.save.putData(Float.toString(act.game.distance), "distance");
+				}
 			act.setCurrentScene(new Wybor());
 			
 			break;

@@ -60,11 +60,14 @@ public class Przeciwnik
 	
 	void kill()
 	{
+		if (is_alive == false) return;
 		hp = 0;
 		defence = 0 ;
 		is_alive = false;
 		tex.stopAnimation();
 		tex.detachSelf();//dziala
+		act.game.cash += 100;
+		System.out.println(act.game.cash);
 	}
 	
 	void take_a_shot()
