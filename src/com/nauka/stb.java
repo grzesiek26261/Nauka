@@ -19,9 +19,9 @@ public class stb
 	{
 		act = MainActivity.getSharedInstance();
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
-		A = new BitmapTextureAtlas(w,h, TextureOptions.DEFAULT);
 		w = poteguj(w);
 		h = poteguj(h);
+		A = new BitmapTextureAtlas(w,h, TextureOptions.DEFAULT);
   	  	T = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.A, act, filename + ".png", 0, 0);
   	    act.getTextureManager().loadTexture(A);
 	}

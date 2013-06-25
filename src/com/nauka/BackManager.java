@@ -24,7 +24,8 @@ public class BackManager
 			act.finish();
 			break;
 		case 1:
-			act.setCurrentScene(new Introd());
+			act.finish();
+			
 			break;
 		case 2:
 			act.setCurrentScene(new Menu());

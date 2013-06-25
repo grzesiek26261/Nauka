@@ -25,6 +25,7 @@ public class MainActivity extends BaseGameActivity
 	 public Scene mCurrentScene; //uchwyt do obecnie aktywnej sceny           
 	 
 	 public Gra game;
+	 public Manager M;
 	 public static BaseActivity instance; //?
 	 public int ID = 0 ;//id sceny aktywnej
 	 private BackManager backmanager;
@@ -60,6 +61,7 @@ public class MainActivity extends BaseGameActivity
 	    	mFont.reload();
 	    	
 	    	backmanager = new BackManager();
+	    	M = new Manager();
 	    	//setCurrentScene(new LevelSelector (21,new lb("Menu",320,480),new lb("star",128,128),new lb("level",512,512),new lb("level_lock",512,512)));
 	    	
 	    	

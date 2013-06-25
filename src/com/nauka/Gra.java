@@ -13,43 +13,57 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.text.style.BulletSpan;
 
 public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListener,ITimerCallback 
 {
 	MainActivity act;
-	int w,h;
+			 int w,h,tick = 0 ;
 
 	Sceneria sceneria;
 	Sprite pocisk;
 	Samolot mig;
 	_HUD_ hud;
 	
-	TimerHandler timerHandler,sceneriatimer;
-	int tick = 0 ; //zegar
-	
-	
+	TimerHandler timerHandler;							
     private SensorManager sensorManager;
+    
+    Przeciwnik[] tester;
+    
+    
     
 	Gra(int typ)
 	{
 		act = MainActivity.getSharedInstance();
 		w = act.WIDTH;
 		h = act.HEIGHT;
-		act.ID = 3;
-		act.game = this;
-		act.mCurrentScene = this;
+			act.ID = 3;
+			act.game = this;
+			act.mCurrentScene = this;
+			
+			
+			
+			
 		hud = new _HUD_();
 		hud.setVisible(true);
 		sceneria = new Sceneria();
-		
-		
-		FPSLogger a = new FPSLogger();
-		registerUpdateHandler(a);
-	    mig = new Samolot(typ);
-	    
 
-		
+		FPSLogger a = new FPSLogger();
+			 registerUpdateHandler(a);
+	    mig = new Samolot(typ);
 		attachChild(sceneria.mapa);
+		
+		tester = new Przeciwnik[4];
+			for(int i = 0 ; i < tester.length;i++)
+				tester[i] = new Przeciwnik((int) (i*50),0);
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		for(int i = 0 ; i < sceneria.cloud.length; i++)
 			attachChild(sceneria.cloud[i]);
@@ -75,14 +89,47 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		public void onTimePassed(TimerHandler h) {
 		
 		tick++;
-		if(tick%100 == 0)hud.updateHUD();//za kazdym razem updatuje 
-		sceneria.update();
+		if(tick%100 == 0)
+		{
+			hud.updateHUD();
+			
+		}
+		
+		if(tick % 3 == 0 )
+		{
+			sceneria.update();
+		}
+
+		if(tick%10 == 0 )
+		{
+			for(int i = 0 ; i < tester.length;i++)
+				tester[i].move();
+			
+			
+				kolizja();
+				mig.koliduj(tester);
+		}
+		
+		
+		
+		
+		
 		
 		if(tick>=1000) tick = 0 ;
 	}
 	
 	
-	
+	void kolizja()
+	{
+		//for (int i = 0 ; i<mig.bullet.length;i++)
+			//mig.bullet[i].checkcollision();
+		
+			for(int i = 0 ; i < mig.bullet.length; i++)
+			{
+				mig.bullet[i].checkcollision(tester);
+			}
+		
+	}
 	
 	
 	@Override
@@ -102,6 +149,7 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }
 
 

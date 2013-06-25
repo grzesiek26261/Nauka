@@ -11,15 +11,16 @@ public class Samolot
 	 		y,
 	 		speed,
 	 		przegrzanie=0,
-	 		szybkosc_przegrzewania=0.9f,
+	 		szybkosc_przegrzewania=0.7f,
 	 		szybkosc_chlodzenia = 0.4f,
 	 		wspolczynnik_cieplny = 1f,
-	 		max_przegrzania = 10f;
+	 		max_przegrzania = 30f;
 	 
 	 int 	w,
 	 		h,
 	 		typ = -1,
-	 		ilosc_karabinow = 2;
+	 		ilosc_karabinow = 2,
+	 		wystrzelonych = 0 ;
 	
 	 Sprite 	tex;
 	 
@@ -43,7 +44,7 @@ TextureRegion 	pocisktex;
 		
 		this.typ = typ;
 		
-		bullet = new Bullet[164];//na mapie moga byc jednoczesnie 32 pociski
+		bullet = new Bullet[46];//na mapie moga byc jednoczesnie 32 pociski
 	
 		tex = new Sprite(0, 0, new lb("s"+Integer.toString(typ), 512, 512).region);
 			tex.setScaleCenter(0, 0);
@@ -142,6 +143,8 @@ TextureRegion 	pocisktex;
 		  if(bullet[i].isready) {c++;}
 	  }
 	
+	  wystrzelonych = bullet.length - c;
+	  
 	  czymoznastrzelac = false;
 	  int k = 0 ; 
 	  if(c>=ilosc)
@@ -159,7 +162,18 @@ TextureRegion 	pocisktex;
 	  
 	}
 
-
+	void koliduj(Przeciwnik[] x)
+	{
+		for(int i = 0 ; i < x.length; i++)
+		{ if(x[i].is_alive)	 
+			if(tex.getX() > x[i].tex.getX() && tex.getX() + tex.getWidthScaled() < x[i].tex.getX() + x[i].tex.getWidthScaled() &&
+					tex.getY() > x[i].tex.getY() && tex.getY() + tex.getHeightScaled() < x[i].tex.getY() + x[i].tex.getHeightScaled() )
+			{
+				System.out.println("Kurwa jeb³em! PAcz jak jeb³em!");
+				//co ma robic po dedzie
+			}
+		}
+	}
 
 	
 	

@@ -1,140 +1,165 @@
 package com.nauka;
 
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnSceneTouchListener;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
-import org.anddev.andengine.input.touch.detector.ScrollDetector;
-import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorListener;
 
-import android.view.MotionEvent;
-
-public class Wybor extends Scene implements IOnSceneTouchListener, IScrollDetectorListener
+public class Wybor extends Scene 
 {
 	MainActivity act;
 	
 	Sprite background;
+	int active;
 	Sprite is1;
 	Sprite is2;
 	Sprite is3;
+	Sprite arrow_right,arrow_left;
 	int w,h;
-	private float mTouchX , mTouchY , mTouchOffsetX , mTouchOffsetY ;
+	
 	boolean canchange = false;
 	
 	
 	
 	Wybor()
 	{
-		act = MainActivity.getSharedInstance();
-		
+		act = MainActivity.getSharedInstance();	
 		w = act.WIDTH; h = act.HEIGHT;
-		act.mCamera.setCenter(w / 2 , h / 2);
-		
-		 
 		act.ID = 2;
+		
+		active = 0 ;
+		
+		arrow_right = new Sprite(-100,-100,new lb("arrow_right",256,256).region){
+			@Override
+			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
+			{
+				if(pEvent.isActionDown())
+				{
+					active++; if (active > 3) active = 0;
+					change_active();
+				}
+			return false;
+			}
+		};
+		
+		arrow_left = new Sprite(-100,-100,new lb("arrow_left",256,256).region){
+			@Override
+			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
+			{
+				if(pEvent.isActionDown())
+				{
+					active--; if (active <0 ) active = 3;
+					change_active();
+				}
+			return false;
+			}
+		};	
+		 
+		
+		
+		
+		
 		lb background_t = new lb("Menu", 512, 512);
-		background = new Sprite(0, 0, background_t.region);
-		background.setScaleCenter(0, 0);
-		background.setWidth(w);
-		background.setHeight(h);		
+			background = new Sprite(0, 0, background_t.region);
+			background.setScaleCenter(0, 0);
+			background.setWidth(w);
+			background.setHeight(h);		
 	
 		lb is1_t = new lb("is1", 512, 512);
-		is1 = new Sprite(0, 0, is1_t.region)
+		is1 = new Sprite(-2230, 0, is1_t.region)
 		{
 			@Override
 			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
 			{
-				if(pEvent.isActionDown()&& canchange == true)
+				if(pEvent.isActionDown())
 				{
-					act.setCurrentScene(new Gra(1));
-					return true;
+					act.setCurrentScene(new Gra(1));	
 				}
-				else
 					return false;
 			}
 		};
-		is1.setScaleCenter(0, 0);
-		is1.setScale(w / is1.getWidth() / 1f);
-		is1.setPosition(w * 0.99f - is1.getWidthScaled(), h  * 0.6f - is1.getHeightScaled());
+			is1.setScaleCenter(0, 0);
+			is1.setScale(w / is1.getWidth() );
+			is1.setPosition(w * 0.99f - is1.getWidthScaled(), h  * 0.6f - is1.getHeightScaled());
 		
-		lb is2_t = new lb("is2", 512, 512);
-		is2 = new Sprite(0, 0, is2_t.region)
+		
+		is2 = new Sprite(-2230, 0, new lb("is2", 512, 512).region)
 	    {
 	    	@Override
 			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
 			{
-				if(pEvent.isActionDown()&& canchange == true)
+				if(pEvent.isActionDown())
 				{
 					act.setCurrentScene(new Gra(2));
-					return true;
 				}
-				else
 					return false;
 			}
 		};
 		is2.setScaleCenter(0, 0);
-		is2.setScale(w / is2.getWidth() / 1f);
-		is2.setPosition(w * 0.99f - is2.getWidthScaled(), h  * 1.1f - is2.getHeightScaled());
-		
+		is2.setScale(w / is2.getWidth() );
+				
 		lb is3_t = new lb("is3", 512, 512);
-		is3 = new Sprite(0, 0, is3_t.region)
+		is3 = new Sprite(-2230, 0, is3_t.region)
 	    {
 	    	@Override
 			public boolean onAreaTouched(TouchEvent pEvent, float pX, float pY)
 			{
-				if(pEvent.isActionDown() && canchange == true)
+				if(pEvent.isActionDown())
 				{
 					act.setCurrentScene(new Gra(3));
-					return true;
 				}
-				else
 					return false;
 			}
 		};
 		is3.setScaleCenter(0, 0);
 		is3.setScale(w / is3.getWidth() );
-		is3.setPosition(w * 0.99f - is3.getWidthScaled(), h  * 1.6f - is3.getHeightScaled());
+		
+		
+	
 		
 		attachChild(background);
 		attachChild(is1); registerTouchArea(is1);
 		attachChild(is2); registerTouchArea(is2);
 		attachChild(is3); registerTouchArea(is3);
 		
-		
-		this.setOnSceneTouchListener(this);
+		arrow_right.setScaleCenter(0, 0);
+		arrow_right.setScale(w/4/arrow_right.getWidth());
+		arrow_right.setPosition(w-arrow_right.getWidthScaled(), h - arrow_right.getHeightScaled());
+		attachChild(arrow_right);registerTouchArea(arrow_right);
+	
+		arrow_left.setScaleCenter(0, 0);
+		arrow_left.setScale(w/4/arrow_left.getWidth());
+		arrow_left.setPosition(0, h - arrow_left.getHeightScaled());
+		attachChild(arrow_left);registerTouchArea(arrow_left);
+	
 	}
 
-	@Override
-	public void onScroll(ScrollDetector pScollDetector, TouchEvent pTouchEvent,
-			float pDistanceX, float pDistanceY) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pTouchEvent) {
-
-		   if(pTouchEvent.getAction() == MotionEvent.ACTION_DOWN )
-	        {
-			   canchange =true;
-	                mTouchX = pTouchEvent.getMotionEvent().getX();
-	                mTouchY = pTouchEvent.getMotionEvent().getY();          
-	        }
-	        else if(pTouchEvent.getAction() == MotionEvent.ACTION_MOVE)
-	        {
-	        	canchange = false;
-	                float newX = pTouchEvent.getMotionEvent().getX() ;
-	                float newY = pTouchEvent.getMotionEvent().getY();             
-	                mTouchOffsetX = (newX - mTouchX);
-	                mTouchOffsetY = (newY - mTouchY);
-	                float newScrollX = act.mCamera.getCenterX() - mTouchOffsetX;
-	                float newScrollY = act.mCamera.getCenterY() - mTouchOffsetY;               
-	                act.mCamera.setCenter(newScrollX, newScrollY);
-	                mTouchX = newX;
-	                mTouchY = newY;                
-	        }
-		   //return mPinch.handle(pTouchEvent);
-		
-		return false;
+	
+	void change_active()
+	{
+		switch(active)
+		{
+		case 0:
+			is1.setPosition(w * 0.99f - is1.getWidthScaled(), h  * 0.6f - is1.getHeightScaled());
+			is2.setPosition(-2230, 0);
+			is3.setPosition(-2230, 0);
+			break;
+		case 1:
+			is2.setPosition(w * 0.99f - is1.getWidthScaled(), h  * 0.6f - is1.getHeightScaled());
+			is1.setPosition(-2230, 0);
+			is3.setPosition(-2230, 0);
+			break;
+		case 2:
+			is3.setPosition(w * 0.99f - is1.getWidthScaled(), h  * 0.6f - is1.getHeightScaled());
+			is2.setPosition(-2230, 0);
+			is1.setPosition(-2230, 0);
+			break;
+		}
 	}
+	
+	
+	
+	
+	
+	
 }

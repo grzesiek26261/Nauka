@@ -25,12 +25,12 @@ public class Sceneria
 		mapa.setWidth(act.WIDTH);
 		mapa.setHeight(act.HEIGHT);
 		
-		cloud = new Sprite[3];
+		cloud = new Sprite[9];
 		
 		for(int i = 0 ; i < cloud.length ; i++)
 		{
 			
-		cloud[i] = new Sprite (0,0,new lb("cloud",256,256).region);
+		cloud[i] = new Sprite (0,0,act.M.cloud);
 		cloud[i].setScaleCenter(0, 0);
 		cloud[i].setScale(act.HEIGHT/13/cloud[i].getHeight());
 		cloud[i].setPosition(i * cloud[i].getWidthScaled() + 45,r.nextInt(150));
@@ -46,7 +46,7 @@ public class Sceneria
 		
 	for(int i = 0 ; i < cloud.length ; i++)
 	{	
-		cloud[i].setPosition(cloud[i].getX(), cloud[i].getY()+1 );
+		cloud[i].setPosition(cloud[i].getX(), cloud[i].getY()+1.5f );
 		if(cloud[i].getY() > act.HEIGHT)reset(cloud[i]);
 	}	
 		
@@ -57,7 +57,7 @@ public class Sceneria
 	
 	void reset(Sprite x)
 	{
-		x.setPosition(r.nextInt(act.WIDTH), -(r.nextInt(act.HEIGHT/2)));
+		x.setPosition(r.nextInt(act.WIDTH), -(r.nextInt(act.HEIGHT)));
 	}
 	
 	
