@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.MoveYModifier;

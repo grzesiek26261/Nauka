@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.SmoothCamera;
@@ -7,12 +7,14 @@ import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.opengl.font.Font;
+import org.anddev.andengine.opengl.font.FontFactory;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.anddev.andengine.ui.activity.BaseActivity;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.view.Display;
 
 
@@ -53,18 +55,26 @@ public class MainActivity extends BaseGameActivity
 		public void onLoadResources() 
 	    { //tu zalaczam wszystkie zasoby
 	    	
-	    	org.anddev.andengine.opengl.font.FontFactory.setAssetBasePath("Fonts/"); //ustawiam sciezke dla czcionek w folderze Assets/Fonts/ 	
+	    	FontFactory.setAssetBasePath("Fonts/"); //ustawiam sciezke dla czcionek w folderze Assets/Fonts/ 	
 	    	BitmapTextureAtlas mDroidFontTexture = new BitmapTextureAtlas( 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 	    	
-	    	mFont = org.anddev.andengine.opengl.font.FontFactory.createFromAsset(mDroidFontTexture,this,"spaintfont.ttf",
-	    			11f ,true,Color.WHITE);
-	    	mFont.reload();
+	    	mFont = FontFactory.createFromAsset(mDroidFontTexture,this,"popwarner.ttf",
+	    			40f ,true,Color.WHITE);
+	    	getFontManager().loadFont(mFont);
+	    	
+
+	    
+	    	//mFont = new Font(mDroidFontTexture, Typeface.create(Typeface.DEFAULT,
+	    	  //  Typeface.BOLD), 40, true, Color.WHITE);
+	    	mEngine.getTextureManager().loadTexture(mDroidFontTexture);
+	    	mEngine.getFontManager().loadFont(mFont);
+	    	
+	    	
+	    	
 	    	
 	    	backmanager = new BackManager();
 	    	M = new Manager();
-	    	//setCurrentScene(new LevelSelector (21,new lb("Menu",320,480),new lb("star",128,128),new lb("level",512,512),new lb("level_lock",512,512)));
-	    	
-	    	
+
 	    }
 	 
 	    

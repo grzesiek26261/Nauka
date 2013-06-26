@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;

@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import java.util.Random;
 
@@ -9,6 +9,8 @@ public class Sceneria
   MainActivity act;
 	Sprite mapa;
 	Sprite[] cloud;
+	float[][] pos;
+	int c=0;
 	
 	
 	Random r;
@@ -18,7 +20,12 @@ public class Sceneria
 		lb mapa_t = new lb("Mapa", 512, 512);
 		
 		r = new Random();
-		
+		pos = new float[200][2];
+			for(int i = 0 ; i < 200; i++)
+				{
+					pos[i][0] = r.nextInt((int) (act.WIDTH));
+					pos[i][1] = - r.nextInt(act.HEIGHT * 3 );
+				}
 		
 		mapa = new Sprite(0, 0, mapa_t.region);
 		mapa.setScaleCenter(0, 0);
@@ -57,7 +64,10 @@ public class Sceneria
 	
 	void reset(Sprite x)
 	{
-		x.setPosition(r.nextInt(act.WIDTH), -(r.nextInt(act.HEIGHT)));
+		c++;
+		if(c>=pos.length) c = 0 ;
+		x.setPosition(pos[c][0],pos[c][1]);
+		
 	}
 	
 	

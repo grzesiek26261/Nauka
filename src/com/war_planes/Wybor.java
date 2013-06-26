@@ -1,7 +1,8 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.sprite.Sprite;
+import org.anddev.andengine.entity.text.Text;
 import org.anddev.andengine.input.touch.TouchEvent;
 
 public class Wybor extends Scene 
@@ -17,7 +18,7 @@ public class Wybor extends Scene
 	int w,h;
 	
 	boolean canchange = false;
-	
+	Text kasa;
 	
 	
 	Wybor()
@@ -27,6 +28,19 @@ public class Wybor extends Scene
 		act.ID = 2;
 		
 		active = 0 ;
+		
+		
+		IO save = new IO();
+		String first_play = save.getData("first_play");
+		if (first_play.equals("null")) save.FirstGameDeclare();
+		
+		String cash = save.getData("cash") ; 
+		kasa = new Text(0,0,act.mFont,cash+"$");
+		kasa.setColor(220/255f,175/255f,5/255f);//bo w paincie R=255,G=200,B=5
+		kasa.setPosition(w/2 - kasa.getWidth()/2 , 0);
+		
+		
+		
 		
 		arrow_right = new Sprite(-100,-100,new lb("arrow_right",256,256).region){
 			@Override
@@ -89,7 +103,8 @@ public class Wybor extends Scene
 			{
 				if(pEvent.isActionDown())
 				{
-					act.setCurrentScene(new Gra(2));
+					if(act.game.cash >= 120000 )
+						act.setCurrentScene(new Gra(2));
 				}
 					return false;
 			}
@@ -105,6 +120,7 @@ public class Wybor extends Scene
 			{
 				if(pEvent.isActionDown())
 				{
+					if(act.game.cash >= 350000 )
 					act.setCurrentScene(new Gra(3));
 				}
 					return false;
@@ -130,7 +146,7 @@ public class Wybor extends Scene
 		arrow_left.setScale(w/4/arrow_left.getWidth());
 		arrow_left.setPosition(0, h - arrow_left.getHeightScaled());
 		attachChild(arrow_left);registerTouchArea(arrow_left);
-	
+		attachChild(kasa);
 	}
 
 

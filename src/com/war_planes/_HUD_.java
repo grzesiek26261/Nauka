@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;

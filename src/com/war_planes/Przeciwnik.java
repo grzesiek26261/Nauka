@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import java.util.Random;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
@@ -67,7 +67,7 @@ public class Przeciwnik
 		tex.stopAnimation();
 		tex.detachSelf();//dziala
 		act.game.cash += 100;
-		System.out.println(act.game.cash);
+		
 	}
 	
 	void take_a_shot()

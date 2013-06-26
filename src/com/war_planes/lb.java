@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;

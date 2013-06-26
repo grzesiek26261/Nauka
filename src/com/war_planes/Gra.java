@@ -1,4 +1,4 @@
-package com.nauka;
+package com.war_planes;
 //test
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
@@ -49,7 +49,6 @@ public class Gra extends Scene implements SensorEventListener,IOnSceneTouchListe
 		
 			cash = Integer.parseInt(save.getData("cash")) ; 
 			distance = Float.parseFloat(save.getData("distance"));
-			
 			
 		hud = new _HUD_();
 		hud.setVisible(true);
